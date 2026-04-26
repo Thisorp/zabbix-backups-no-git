@@ -117,12 +117,11 @@ export_api() {
   log "INFO" "Testing Zabbix API..."
 
   "${CURL_BIN:-curl}" -sS \
-    -H "Content-Type: application/json-rpc" \
-    -X POST \
-    -d '{"jsonrpc":"2.0","method":"apiinfo.version","params":{},"id":100}' \
-    "${ZBX_URL%/}/api_jsonrpc.php" \
-    | "${JQ_BIN:-jq}" -r '.result' > "${EXPORT_DIR}/zabbix_api_version.txt" \
-    | "${JQ_BIN:-jq}" -r '.result' > "${EXPORT_DIR}/zabbix_api_version.txt"
+  -H "Content-Type: application/json-rpc" \
+  -X POST \
+  -d '{"jsonrpc":"2.0","method":"apiinfo.version","params":{},"id":100}' \
+  "${ZBX_URL%/}/api_jsonrpc.php" \
+  | "${JQ_BIN:-jq}" -r '.result' > "${EXPORT_DIR}/zabbix_api_version.txt"
 
   [[ "${EXPORT_TEMPLATES:-true}" == "true" ]] && \
     export_object_group "template.get" "templateid" "templates" "templates.${EXPORT_FORMAT:-json}"

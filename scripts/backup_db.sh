@@ -10,17 +10,33 @@ read_exclude_tables() {
 
 backup_db_mysql() {
   local outfile="${BACKUP_BASE}/db/zabbix_${DB_TYPE}_${DB_BACKUP_MODE}_${DATE}.sql.gz"
-  local -a exclude_args=()
+  local tmp_sql
+  local -a ignore_args=()
+  local -a excluded_tables=()
   local tbl
+
+  tmp_sql="$(mktemp)"
 
   if [[ "${DB_BACKUP_MODE}" == "config_only" ]]; then
     while IFS= read -r tbl; do
       [[ -z "$tbl" ]] && continue
-      exclude_args+=(--ignore-table="${DB_NAME}.${tbl}")
+      excluded_tables+=("$tbl")
+      ignore_args+=(--ignore-table="${DB_NAME}.${tbl}")
     done < <(read_exclude_tables)
   fi
 
   log "INFO" "Backup MySQL/MariaDB DB: ${DB_HOST}:${DB_PORT}/${DB_NAME}"
+
+  if [[ "${#excluded_tables[@]}" -gt 0 ]]; then
+    MYSQL_PWD="${DB_PASS}" mysqldump \
+      -h "${DB_HOST}" \
+      -P "${DB_PORT}" \
+      -u "${DB_USER}" \
+      --no-data \
+      --skip-triggers \
+      "${DB_NAME}" \
+      "${excluded_tables[@]}" >> "$tmp_sql"
+  fi
 
   MYSQL_PWD="${DB_PASS}" mysqldump \
     -h "${DB_HOST}" \
@@ -30,8 +46,13 @@ backup_db_mysql() {
     --routines \
     --triggers \
     --events \
-    "${exclude_args[@]}" \
-    "${DB_NAME}" | gzip > "$outfile"
+    --hex-blob \
+    --set-gtid-purged=OFF \
+    "${ignore_args[@]}" \
+    "${DB_NAME}" >> "$tmp_sql"
+
+  gzip -c "$tmp_sql" > "$outfile"
+  rm -f "$tmp_sql"
 
   DB_BACKUP_FILE="$outfile"
 }
@@ -44,7 +65,7 @@ backup_db_postgresql() {
   if [[ "${DB_BACKUP_MODE}" == "config_only" ]]; then
     while IFS= read -r tbl; do
       [[ -z "$tbl" ]] && continue
-      exclude_args+=(--exclude-table="$tbl")
+      exclude_args+=(--exclude-table-data="$tbl")
     done < <(read_exclude_tables)
   fi
 
