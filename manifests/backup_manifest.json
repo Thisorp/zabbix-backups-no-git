@@ -1,0 +1,17 @@
+{
+  "backup_time": "2026-04-26_132816",
+  "hostname": "node-01",
+  "zabbix_version": "zabbix_server (Zabbix) 7.4.9",
+  "db_type": "postgresql",
+  "db_version": "PostgreSQL 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+  "db_host": "172.16.0.3",
+  "db_port": "5432",
+  "db_name": "zabbix",
+  "db_backup_mode": "config_only",
+  "db_status": "success",
+  "db_backup_file": "/opt/zabbix-config-backup/storage/db/zabbix_postgresql_config_only_2026-04-26_132816.dump",
+  "etc_status": "success",
+  "etc_backup_file": "/opt/zabbix-config-backup/storage/etc/zabbix_etc_2026-04-26_132816.tar.gz",
+  "api_export_status": "success",
+  "api_export_dir": "/opt/zabbix-config-backup/storage/exports/2026-04-26_132816"
+}

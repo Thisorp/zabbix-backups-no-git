@@ -1,0 +1,22 @@
+# Zabbix heavy/runtime tables - not needed for config-only rebuild
+
+history
+history_uint
+history_str
+history_text
+history_log
+
+trends
+trends_uint
+
+events
+problem
+alerts
+acknowledges
+auditlog
+auditlog_details
+escalations
+service_alarms
+
+sessions
+housekeeper

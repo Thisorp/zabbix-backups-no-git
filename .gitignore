@@ -1,0 +1,6 @@
+conf/backup.env
+storage/
+*.dump
+*.sql
+*.sql.gz
+*.tar.gz
