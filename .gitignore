@@ -4,3 +4,4 @@ storage/
 *.sql
 *.sql.gz
 *.tar.gz
+*.log
