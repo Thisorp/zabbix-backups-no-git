@@ -1,5 +1,5 @@
 {
-  "backup_time": "2026-04-26_132816",
+  "backup_time": "2026-04-26_142341",
   "hostname": "node-01",
   "zabbix_version": "zabbix_server (Zabbix) 7.4.9",
   "db_type": "postgresql",
@@ -9,9 +9,9 @@
   "db_name": "zabbix",
   "db_backup_mode": "config_only",
   "db_status": "success",
-  "db_backup_file": "/opt/zabbix-config-backup/storage/db/zabbix_postgresql_config_only_2026-04-26_132816.dump",
+  "db_backup_file": "/home/laborant/zabbix-config-backup/storage/db/zabbix_postgresql_config_only_2026-04-26_142341.dump",
   "etc_status": "success",
-  "etc_backup_file": "/opt/zabbix-config-backup/storage/etc/zabbix_etc_2026-04-26_132816.tar.gz",
+  "etc_backup_file": "/home/laborant/zabbix-config-backup/storage/etc/zabbix_etc_2026-04-26_142341.tar.gz",
   "api_export_status": "success",
-  "api_export_dir": "/opt/zabbix-config-backup/storage/exports/2026-04-26_132816"
+  "api_export_dir": "/home/laborant/zabbix-config-backup/storage/exports/2026-04-26_142341"
 }
