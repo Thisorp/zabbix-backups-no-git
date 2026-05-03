@@ -183,11 +183,10 @@ sudo crontab -e
 Thêm:
 
 ```
-0 2 * * 0 ENV_FILE=/home/setup/zabbix-config-backup/conf/backup.env \
-bash /home/setup/zabbix-config-backup/scripts/run_backup.sh >> /home/setup/zabbix-config-backup/storage/cron.log 2>&1
+0 2 1 * * ENV_FILE=/home/setup/zabbix-config-backup/conf/backup.env bash /home/setup/zabbix-config-backup/scripts/run_backup.sh >> /home/setup/zabbix-config-backup/storage/cron.log 2>&1
 ```
 
-👉 Chạy lúc **02:00 Chủ nhật hàng tuần**
+👉 Chạy lúc **02:00 sáng ngày đầu tiên hằng tháng**
 
 ---
 
